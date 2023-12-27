@@ -11,9 +11,7 @@ import com.example.bankapp.services.AccountService;
 import com.example.bankapp.services.UserService;
 import com.example.bankapp.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -46,7 +44,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public List<UserDto> findAll() {
         return repository.findAll()
                 .stream()
@@ -68,7 +65,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public Integer validateAccount(Integer id) {
         User user = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No user was found for user account validation"));
@@ -102,7 +98,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public AuthenticationResponse register(UserDto dto) {
         validator.validate(dto);
         User user = UserDto.toEntity(dto);
