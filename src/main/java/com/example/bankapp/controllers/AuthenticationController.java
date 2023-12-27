@@ -5,6 +5,7 @@ import com.example.bankapp.dto.AuthenticationResponse;
 import com.example.bankapp.dto.UserDto;
 import com.example.bankapp.services.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Tag(name = "authentication")
 public class AuthenticationController {
 
