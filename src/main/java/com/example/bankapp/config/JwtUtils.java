@@ -15,7 +15,7 @@ import java.util.function.Function;
 @Service
 public class JwtUtils {
 
-    private  String jwtSigninKey = "F727D46EF07719E6BF32E81560C698F71EB3CC79E2C75BBD9AFA714B3E68351B";
+    private final String jwtSigninKey = "F727D46EF07719E6BF32E81560C698F71EB3CC79E2C75BBD9AFA714B3E68351B";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -56,7 +56,7 @@ public class JwtUtils {
         return Jwts.builder().setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .claim("authorities", userDetails.getAuthorities())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(200)))
                 .signWith(SignatureAlgorithm.HS256, jwtSigninKey).compact();
     }

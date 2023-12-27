@@ -12,6 +12,7 @@ import com.example.bankapp.services.UserService;
 import com.example.bankapp.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +25,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private static final String ROLE_USER = "ROLE_USER";
@@ -113,6 +114,7 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", savedUser.getId());
         claims.put("fullName", savedUser.getFirstname() + " " + savedUser.getLastname());
+        System.out.println(savedUser);
         String token = jwtUtils.generateToken(savedUser, claims);
         return AuthenticationResponse.builder()
                 .token(token)
